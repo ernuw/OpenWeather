@@ -1,10 +1,11 @@
 package com.davidru85.openweather;
 
 public class Values {
-	private static final long ONE_MINUTE = 1000 * 60;
-	private static final long ONE_HOUR = 1000 * 60 * 60;
-	private static final long TEN_SECONDS = 1000 * 10;
-	private static final long TEN_MINUTES = 1000 * 60 * 10;
+	public static final long ONE_MINUTE = 1000 * 60;
+	public static final long FIFTEEN_MINUTES = 1000 * 60 * 15;
+	public static final long ONE_HOUR = 1000 * 60 * 60;
+	public static final long TEN_SECONDS = 1000 * 10;
+	public static final long TEN_MINUTES = 1000 * 60 * 10;
 
 	private static final long elapsed_time = ONE_HOUR;
 	

@@ -44,8 +44,6 @@ public class MainActivity extends Activity {
 
 		prefs = PreferenceManager
 				.getDefaultSharedPreferences(getApplicationContext());
-
-		// long date_update = prefs.getLong("date_update", 0);
 	}
 
 	@Override
@@ -66,9 +64,7 @@ public class MainActivity extends Activity {
 				Location loc = Localizator.geoLocate(getApplicationContext());
 				if (loc != null) {
 					URL = Conversor.getUrlWeather(loc);
-					// prefs.edit().putString("URL", URL).commit();
 					refresh();
-					// show_info();
 				} else {
 					// TODO LOC ES NULO
 					textTemperature.setText(getResources().getString(
@@ -77,7 +73,6 @@ public class MainActivity extends Activity {
 				}
 			} else {
 				activeLocation();
-				// providerDisabled();
 			}
 		} else {
 			no_internet();
@@ -86,19 +81,6 @@ public class MainActivity extends Activity {
 
 	private boolean isLocationProviderEnabled() {
 		return Localizator.isProviderEnabled(getApplicationContext());
-	}
-
-	private void schedule_check() {
-
-		long time = Values.getElapsedTime();
-
-		Intent intent = new Intent(this, UpdateWeather.class);
-		PendingIntent pendingIntent = PendingIntent.getBroadcast(
-				this.getApplicationContext(), 0, intent,
-				PendingIntent.FLAG_UPDATE_CURRENT);
-		AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-				System.currentTimeMillis(), time, pendingIntent);
 	}
 
 	private void refresh() {
@@ -111,20 +93,20 @@ public class MainActivity extends Activity {
 					save_weather(weather);
 					Toast toast2 = Toast.makeText(getApplicationContext(),
 							R.string.success, Toast.LENGTH_SHORT);
-					// toast2.show();
+					toast2.show();
 					if (weather.getRain_threehours() > 0
 							|| weather.getSnow_threehours() > 0) {
 						// TODO Probabilidad de lluvia o nieve
 					}
+					Log.e(LogDavid, "ShowInfo");
 					show_info();
 				} else {
 					Toast toast2 = Toast.makeText(getApplicationContext(),
 							R.string.no_weather, Toast.LENGTH_SHORT);
-					// toast2.show();
+					toast2.show();
 				}
 			} catch (Exception e) {
 				Log.e(LogDavid, "Error Refresh: " + e.toString());
-				// e.printStackTrace();
 			}
 		} else {
 			no_internet();
@@ -133,10 +115,10 @@ public class MainActivity extends Activity {
 	}
 
 	private void startServiceWeather() {
+		Log.e(LogDavid, "StarService");
 		Intent i = new Intent(getApplicationContext(), ServiceWeather.class);
 		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		getApplicationContext().startService(i);
-		
 	}
 
 	private void save_weather(Weather weather) {
@@ -329,7 +311,6 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}

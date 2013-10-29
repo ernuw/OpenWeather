@@ -48,29 +48,45 @@ public class UpdateWeather extends BroadcastReceiver {
 		JsonParser jsonParser = new JsonParser(URL);
 		WeatherAsyncTask weatherAsyncTask = new WeatherAsyncTask();
 		try {
-			Weather weather = weatherAsyncTask.execute(jsonParser).get();
-			if (weather != null) {
-				save_weather(weather);
+			if (necesaryUpdate()) {
+				Weather weather = weatherAsyncTask.execute(jsonParser).get();
+				if (weather != null) {
+					save_weather(weather);
 
-				Toast toast2 = Toast.makeText(context, R.string.success,
-						Toast.LENGTH_SHORT);
-				//toast2.show();
+					Toast toast2 = Toast.makeText(context, R.string.success,
+							Toast.LENGTH_SHORT);
+					toast2.show();
 
-				if (weather.getRain_threehours() > 0
-						|| weather.getSnow_threehours() > 0) {
-					// TODO Probabilidad de lluvia o nieve
+					if (weather.getRain_threehours() > 0
+							|| weather.getSnow_threehours() > 0) {
+						// TODO Probabilidad de lluvia o nieve
+					}
+				} else {
+					Toast toast2 = Toast.makeText(context, R.string.no_weather,
+							Toast.LENGTH_SHORT);
+					toast2.show();
+					Log.e(LogDavid, "No Weather");
 				}
-			} else {
-				Toast toast2 = Toast.makeText(context, R.string.no_weather,
-						Toast.LENGTH_SHORT);
-				//toast2.show();
-				Log.e(LogDavid, "No Weather");
 			}
 		} catch (Exception e) {
 			Log.e(LogDavid, "Error Refresh: " + e.toString());
 			e.printStackTrace();
 		}
 
+	}
+
+	private boolean necesaryUpdate() {
+		Log.e(LogDavid, "1");
+		prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		Log.e(LogDavid, "2");
+		long date_last_update = prefs.getLong("date_update", 0) * 1000;
+		Log.e(LogDavid, "3");
+		if ((System.currentTimeMillis() - date_last_update) < Values.FIFTEEN_MINUTES) {
+			Log.e(LogDavid, "4");
+			return false;
+		}
+		Log.e(LogDavid, "5");
+		return true;
 	}
 
 	private void save_weather(Weather weather) {
