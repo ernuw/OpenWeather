@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:summary="@string/settings_summary"
+        android:title="@string/settings_title" >
+        <CheckBoxPreference
+            android:key="alarms"
+            android:title="@string/alarms" />
+        <CheckBoxPreference
+            android:key="autoupdate"
+            android:title="@string/autoupdate" />
+        <EditTextPreference 
+            android:key="date_last_update"
+            android:title="@string/date_last_update"
+            android:editable="false"
+            android:defaultValue="unknown" />
+        <EditTextPreference 
+            android:key="last_date_server"
+            android:title="@string/last_date_server"
+            android:editable="false"
+            android:defaultValue="unknown" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

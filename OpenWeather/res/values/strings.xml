@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">OpenWeather</string>
+
+    <!-- TOAST -->
+    <string name="not_support_gps">Not Support GPS</string>
+    <string name="not_support_network">Not Support NetWork</string>
+    <string name="internet_error">No Internet Connection</string>
+    <string name="no_weather">No Weather</string>
+    <string name="no_location">No Location</string>
+    <string name="success">Success!</string>
+
+    <!-- AlertDialog -->
+    <string name="location_provider_disabled_title">Location Provider Disabled</string>
+    <string name="location_provider_disabled_text">Do you want to enable it?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    
+    <!-- MENU -->
+    <string name="action_refresh">Refresh</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about">About</string>
+
+    <!-- SETTINGS -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_summary">OpenWeather Settings</string>
+    <string name="autoupdate">Autoupdate</string>
+    <string name="alarms">Alarms</string>
+    <string name="date_last_update">Date Last Update</string>
+    <string name="last_date_server">Last Date Server</string>
+</resources>
