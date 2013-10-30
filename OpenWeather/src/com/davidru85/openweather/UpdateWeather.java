@@ -76,16 +76,11 @@ public class UpdateWeather extends BroadcastReceiver {
 	}
 
 	private boolean necesaryUpdate() {
-		Log.e(LogDavid, "1");
 		prefs = PreferenceManager.getDefaultSharedPreferences(context);
-		Log.e(LogDavid, "2");
 		long date_last_update = prefs.getLong("date_update", 0) * 1000;
-		Log.e(LogDavid, "3");
 		if ((System.currentTimeMillis() - date_last_update) < Values.FIFTEEN_MINUTES) {
-			Log.e(LogDavid, "4");
 			return false;
 		}
-		Log.e(LogDavid, "5");
 		return true;
 	}
 

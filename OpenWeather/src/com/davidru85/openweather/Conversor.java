@@ -319,9 +319,9 @@ public class Conversor {
 	public static String getUrlWeather(Location loc) {
 		// TODO
 		String URL = Values.getWeatherURL();
-		URL = URL + "lat=" + roundTwoDecimals(loc.getLatitude());
+		URL = URL + "lat=" + loc.getLatitude();
 		URL = URL + "&";
-		URL = URL + "lon=" + roundTwoDecimals(loc.getLongitude());
+		URL = URL + "lon=" + loc.getLongitude();
 		URL = URL + "&mode=json";
 		return URL;
 	}
@@ -329,10 +329,8 @@ public class Conversor {
 	public static String getUrlWeather2(Location loc) {
 		// TODO
 		String URL = Values.getWeatherURL2();
-		//URL = URL + "lat=" + roundTwoDecimals(loc.getLatitude());
 		URL = URL + "lat=" + loc.getLatitude();
 		URL = URL + "&";
-		//URL = URL + "lon=" + roundTwoDecimals(loc.getLongitude());
 		URL = URL + "lon=" + loc.getLongitude();
 		URL = URL + "&mode=json";
 		return URL;
@@ -340,9 +338,9 @@ public class Conversor {
 
 	public static String getUrlForecast(Location loc) {
 		String URL = Values.getForecastURL();
-		URL = URL + "lat=" + roundTwoDecimals(loc.getLatitude());
+		URL = URL + "lat=" + loc.getLatitude();
 		URL = URL + "&";
-		URL = URL + "lon=" + roundTwoDecimals(loc.getLongitude());
+		URL = URL + "lon=" + loc.getLongitude();
 		URL = URL + "&mode=json";
 		return URL;
 	}
