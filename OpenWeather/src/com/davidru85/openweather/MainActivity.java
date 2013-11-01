@@ -67,9 +67,7 @@ public class MainActivity extends Activity {
 					refresh();
 				} else {
 					// TODO LOC ES NULO
-					textTemperature.setText(getResources().getString(
-							R.string.no_location));
-					textCity.setText("");
+					noLocation();
 				}
 			} else {
 				activeLocation();
@@ -77,6 +75,12 @@ public class MainActivity extends Activity {
 		} else {
 			no_internet();
 		}
+	}
+
+	private void noLocation() {
+		textTemperature.setText(getResources().getString(
+				R.string.no_location));
+		textCity.setText("");
 	}
 
 	private boolean isLocationProviderEnabled() {
@@ -115,7 +119,7 @@ public class MainActivity extends Activity {
 	}
 
 	private void startServiceWeather() {
-		Log.e(LogDavid, "StarService");
+		Log.e(LogDavid, "StartService");
 		Intent i = new Intent(getApplicationContext(), ServiceWeather.class);
 		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		getApplicationContext().startService(i);
@@ -337,6 +341,7 @@ public class MainActivity extends Activity {
 								Intent intent = new Intent(
 										Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 								startActivity(intent);
+								finish();
 							}
 						})
 				.setNegativeButton(getResources().getString(R.string.no),
