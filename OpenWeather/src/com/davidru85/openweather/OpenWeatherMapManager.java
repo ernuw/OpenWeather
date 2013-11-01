@@ -6,9 +6,11 @@ import org.json.JSONObject;
 import android.util.Log;
 
 public class OpenWeatherMapManager {
-	
+
 	private static final String LogDavid = "OpenWeather";
-	
+
+	private static String list = "list";
+
 	private static String coordinates = "coord";
 	private static String system = "sys";
 	private static String weather = "weather";
@@ -50,29 +52,154 @@ public class OpenWeatherMapManager {
 	private static String data_receiving = "dt";
 	private static String city_id = "id";
 	private static String city_name = "name";
+	private static String city_country = "country";
+	private static String city = "city";
 	private static String code = "cod";
 
 	public static Weather[] jsonToForecast(JSONObject datos_object) {
-		// Weather[] forecast = new Weather[];
-		return null;
+
+		try {
+			int cnt;
+			String cityCode, cityId, cityName, cityCountry;
+			double latitude, longitude;
+
+			cnt = datos_object.getInt("cnt");
+			cityCode = datos_object.getString(code);
+
+			if (datos_object.has(OpenWeatherMapManager.city)) {
+				JSONObject cityOb = datos_object
+						.getJSONObject(OpenWeatherMapManager.city);
+				cityId = cityOb.getString(city_id);
+				cityName = datos_object.getString(city_name);
+				cityCountry = datos_object.getString(city_country);
+
+				if (cityOb.has(OpenWeatherMapManager.coordinates)) {
+					JSONObject coordOb = cityOb.getJSONObject(coordinates);
+					latitude = coordOb
+							.getDouble(OpenWeatherMapManager.latitude);
+					longitude = coordOb
+							.getDouble(OpenWeatherMapManager.longitude);
+				} else {
+					return null;
+				}
+				if (datos_object.has(OpenWeatherMapManager.list)) {
+					Weather[] forecast = new Weather[cnt];
+					JSONArray listAr = datos_object
+							.getJSONArray(OpenWeatherMapManager.list);
+					JSONObject listOb;
+					Weather weather;
+					for (int n = 0; n < cnt; n++) {
+						listOb = listAr.getJSONObject(n);
+
+						weather = new Weather();
+						
+						//COMMON
+						weather.setCity_id(cityId);
+						weather.setLatitude(latitude);
+						weather.setLongitude(longitude);
+						weather.setCountry(cityCountry);
+						weather.setCode(cityCode);
+						weather.setCity_name(cityName);
+
+						
+						weather.setData_receiving(listOb
+								.getLong(data_receiving));
+						
+						//CLOUDS						
+						JSONObject cloudsOb = listOb.getJSONObject(clouds);
+						weather.setClouds_all(cloudsOb.getDouble(clouds_all));
+						
+						
+						//WEATHER
+						if (listOb.has(OpenWeatherMapManager.weather)) {
+							JSONArray weatherAr = listOb
+									.getJSONArray(OpenWeatherMapManager.weather);
+							JSONObject weatherOb = weatherAr.getJSONObject(0);
+							weather.setWeather_id(weatherOb.getInt(weather_id));
+							weather.setWeather_main(weatherOb.getString(weather_main));
+							weather.setWeather_description(weatherOb
+									.getString(weather_description));
+							weather.setWeather_icon(weatherOb.getString(weather_icon));
+						} else {
+							Log.d(LogDavid, "jsonToForecast: NoWeather");
+						}
+						
+						// MAIN
+						JSONObject mainOb = listOb.getJSONObject(main);
+						weather.setTemp(mainOb.getDouble(temp));
+						weather.setPreassure(mainOb.getDouble(pressure));
+						weather.setHumidity(mainOb.getDouble(humidity));
+
+						if (mainOb.has(temp_max))
+							weather.setTemp_max(mainOb.getDouble(temp_max));
+						else
+							weather.setTemp_max(0);
+						if (mainOb.has(temp_min))
+							weather.setTemp_min(mainOb.getDouble(temp_min));
+						else
+							weather.setTemp_min(0);
+						if (mainOb.has(sea_level))
+							weather.setSea_level(mainOb.getDouble(sea_level));
+						else
+							weather.setSea_level(0);
+						if (mainOb.has(grnd_level))
+							weather.setGrnd_level(mainOb.getDouble(grnd_level));
+						else
+							weather.setGrnd_level(0);
+
+						//RAIN
+						if (listOb.has(rain)) {
+							JSONObject rainOb = listOb.getJSONObject(rain);
+							weather.setRain_threehours(rainOb.getDouble(rain_threehours));
+							Log.d(LogDavid, "RAIN: " + rainOb.getDouble(rain_threehours));
+						} else {
+							Log.d(LogDavid, "jsonToWeather: NoRain");
+						}
+						
+						//SNOW
+						if (listOb.has(snow)) {
+							JSONObject rainOb = listOb.getJSONObject(snow);
+							weather.setRain_threehours(rainOb.getDouble(snow_threehours));
+						} else {
+							Log.d(LogDavid, "jsonToWeather: NoSnow");
+						}
+						
+						//WIND
+						JSONObject windOb = listOb.getJSONObject(wind);
+						weather.setWind_speed(windOb.getDouble(wind_speed));
+						weather.setWind_degrees(windOb.getDouble(wind_degrees));
+						
+						forecast[n] = weather;
+					}
+					return forecast;
+				} else {
+					return null;
+				}
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			Log.e(LogDavid, "jsonToForecast: " + e.toString());
+			return null;
+		}
 	}
 
 	public static Weather jsonToWeather2(JSONObject datos_object) {
 		try {
 			Weather weather = new Weather();
-			
+
 			weather.setCode(datos_object.getString(code));
-			
-			if(datos_object.has("list")){
+
+			if (datos_object.has("list")) {
 				JSONArray listAr = datos_object.getJSONArray("list");
 				JSONObject listOb = listAr.getJSONObject(0);
-				
+
 				weather.setCity_name(listOb.getString(city_name));
-				
+
 				JSONObject coordOb = listOb.getJSONObject(coordinates);
 				weather.setLatitude(coordOb.getDouble(latitude));
 				weather.setLongitude(coordOb.getDouble(longitude));
-				
+
 				JSONObject mainOb = listOb.getJSONObject(main);
 				weather.setTemp(mainOb.getDouble(temp));
 				weather.setPreassure(mainOb.getDouble(pressure));
@@ -94,22 +221,24 @@ public class OpenWeatherMapManager {
 					weather.setGrnd_level(mainOb.getDouble(grnd_level));
 				else
 					weather.setGrnd_level(0);
-				
+
 				weather.setData_receiving(listOb.getLong(data_receiving));
-				
+
 				JSONObject windOb = listOb.getJSONObject(wind);
 				weather.setWind_speed(windOb.getDouble(wind_speed));
 				weather.setWind_degrees(windOb.getDouble(wind_degrees));
-				
+
 				JSONObject cloudsOb = listOb.getJSONObject(clouds);
 				weather.setClouds_all(cloudsOb.getDouble(clouds_all));
-				
+
 				if (listOb.has(OpenWeatherMapManager.weather)) {
-					JSONArray weatherAr = listOb.getJSONArray(OpenWeatherMapManager.weather);
+					JSONArray weatherAr = listOb
+							.getJSONArray(OpenWeatherMapManager.weather);
 					JSONObject weatherOb = weatherAr.getJSONObject(0);
 					weather.setWeather_id(weatherOb.getInt(weather_id));
 					weather.setWeather_main(weatherOb.getString(weather_main));
-					weather.setWeather_description(weatherOb.getString(weather_description));
+					weather.setWeather_description(weatherOb
+							.getString(weather_description));
 					weather.setWeather_icon(weatherOb.getString(weather_icon));
 				} else {
 					Log.d(LogDavid, "jsonToWeather2: NoWeather");
@@ -117,6 +246,7 @@ public class OpenWeatherMapManager {
 			}
 			return weather;
 		} catch (Exception e) {
+			Log.e(LogDavid, "jsonToWeather2: " + e.toString());
 			return null;
 		}
 	}
@@ -124,7 +254,7 @@ public class OpenWeatherMapManager {
 	public static Weather jsonToWeather(JSONObject datos_object) {
 		try {
 			Weather weather = new Weather();
-			
+
 			JSONObject coordOb = datos_object.getJSONObject(coordinates);
 			weather.setLatitude(coordOb.getDouble(latitude));
 			weather.setLongitude(coordOb.getDouble(longitude));
@@ -135,11 +265,13 @@ public class OpenWeatherMapManager {
 			weather.setSunset(sysOb.getLong(sunset));
 
 			if (datos_object.has(OpenWeatherMapManager.weather)) {
-				JSONArray weatherAr = datos_object.getJSONArray(OpenWeatherMapManager.weather);
+				JSONArray weatherAr = datos_object
+						.getJSONArray(OpenWeatherMapManager.weather);
 				JSONObject weatherOb = weatherAr.getJSONObject(0);
 				weather.setWeather_id(weatherOb.getInt(weather_id));
 				weather.setWeather_main(weatherOb.getString(weather_main));
-				weather.setWeather_description(weatherOb.getString(weather_description));
+				weather.setWeather_description(weatherOb
+						.getString(weather_description));
 				weather.setWeather_icon(weatherOb.getString(weather_icon));
 			} else {
 				Log.d(LogDavid, "jsonToWeather: NoWeather");
@@ -201,5 +333,5 @@ public class OpenWeatherMapManager {
 			return null;
 		}
 	}
-	
+
 }
