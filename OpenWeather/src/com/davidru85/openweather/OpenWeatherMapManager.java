@@ -70,8 +70,8 @@ public class OpenWeatherMapManager {
 				JSONObject cityOb = datos_object
 						.getJSONObject(OpenWeatherMapManager.city);
 				cityId = cityOb.getString(city_id);
-				cityName = datos_object.getString(city_name);
-				cityCountry = datos_object.getString(city_country);
+				cityName = cityOb.getString(city_name);
+				cityCountry = cityOb.getString(city_country);
 
 				if (cityOb.has(OpenWeatherMapManager.coordinates)) {
 					JSONObject coordOb = cityOb.getJSONObject(coordinates);

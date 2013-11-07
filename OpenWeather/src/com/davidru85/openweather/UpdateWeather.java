@@ -1,5 +1,7 @@
 package com.davidru85.openweather;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +11,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -59,7 +62,8 @@ public class UpdateWeather extends BroadcastReceiver {
 
 					if (weather.getRain_threehours() > 0
 							|| weather.getSnow_threehours() > 0) {
-						// TODO Probabilidad de lluvia o nieve
+						// TODO NOTIFICACIÓN Probabilidad de lluvia o nieve
+						notifyWeather();						
 					}
 				} else {
 					Toast toast2 = Toast.makeText(context, R.string.no_weather,
@@ -75,6 +79,24 @@ public class UpdateWeather extends BroadcastReceiver {
 
 	}
 
+	private void notifyWeather() {
+		// TODO Auto-generated method stub
+		NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+		
+		Notification n  = new NotificationCompat.Builder(context)
+        .setContentTitle("RAIN OR SNOW")
+        .setContentText("Rain/Snow")
+        .setSmallIcon(R.drawable.icon_rain_day)/*
+        .setContentIntent(pIntent)
+        .setAutoCancel(true)
+        .addAction(R.drawable.icon, "Call", pIntent)
+        .addAction(R.drawable.icon, "More", pIntent)
+        .addAction(R.drawable.icon, "And more", pIntent)*/.build();
+    
+
+		mNotificationManager.notify(0, n);
+	}
+
 	private boolean necesaryUpdate() {
 		prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		long date_last_update = prefs.getLong("date_update", 0) * 1000;
@@ -85,8 +107,6 @@ public class UpdateWeather extends BroadcastReceiver {
 	}
 
 	private void save_weather(Weather weather) {
-
-		// TODO Auto-generated method stub
 		Editor edit = prefs.edit();
 		Conversor.saveWeather(edit, weather);
 
