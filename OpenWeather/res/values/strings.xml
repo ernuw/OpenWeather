@@ -26,7 +26,7 @@
     <string name="settings_title">Settings</string>
     <string name="settings_summary">OpenWeather Settings</string>
     <string name="autoupdate">Autoupdate</string>
-    <string name="alarms">Alarms</string>
+    <string name="notifications">Notifications</string>
     <string name="date_last_update">Date Last Update</string>
     <string name="last_date_server">Last Date Server</string>
 </resources>
