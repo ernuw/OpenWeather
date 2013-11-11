@@ -78,8 +78,7 @@ public class MainActivity extends Activity {
 	}
 
 	private void noLocation() {
-		textTemperature.setText(getResources().getString(
-				R.string.no_location));
+		textTemperature.setText(getResources().getString(R.string.no_location));
 		textCity.setText("");
 	}
 
@@ -303,9 +302,10 @@ public class MainActivity extends Activity {
 		if (itemId == R.id.action_refresh) {
 			refresh();
 			return true;
-		} /*
-		 * else if (itemId == R.id.action_settings) { settings(); return true; }
-		 */else if (itemId == R.id.action_about) {
+		} else if (itemId == R.id.action_settings) {
+			settings();
+			return true;
+		} else if (itemId == R.id.action_about) {
 			about();
 			return true;
 		} else {
