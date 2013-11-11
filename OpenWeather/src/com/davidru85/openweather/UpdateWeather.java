@@ -2,11 +2,13 @@ package com.davidru85.openweather;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -62,8 +64,9 @@ public class UpdateWeather extends BroadcastReceiver {
 
 					if (weather.getRain_threehours() > 0
 							|| weather.getSnow_threehours() > 0) {
-						// TODO NOTIFICACIÓN Probabilidad de lluvia o nieve
-						notifyWeather();						
+						if (ifNotify()) {
+							notifyWeather();
+						}
 					}
 				} else {
 					Toast toast2 = Toast.makeText(context, R.string.no_weather,
@@ -79,22 +82,36 @@ public class UpdateWeather extends BroadcastReceiver {
 
 	}
 
-	private void notifyWeather() {
-		// TODO Auto-generated method stub
-		NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-		
-		Notification n  = new NotificationCompat.Builder(context)
-        .setContentTitle("RAIN OR SNOW")
-        .setContentText("Rain/Snow")
-        .setSmallIcon(R.drawable.icon_rain_day)/*
-        .setContentIntent(pIntent)
-        .setAutoCancel(true)
-        .addAction(R.drawable.icon, "Call", pIntent)
-        .addAction(R.drawable.icon, "More", pIntent)
-        .addAction(R.drawable.icon, "And more", pIntent)*/.build();
-    
+	private boolean ifNotify() {
+		boolean notify = prefs.getBoolean("ActiveNotifications", false);
+		if (notify == true) {
+			Log.e(LogDavid, "NOTIFICATIONS YES");
+			return true;
+		}
+		prefs.edit().putBoolean("ActiveNotifications", false).commit();
+		Log.e(LogDavid, "NOTIFICATIONS NO");
+		return false;
+	}
 
-		mNotificationManager.notify(0, n);
+	private void notifyWeather() {
+		NotificationManager mNotificationManager = (NotificationManager) context
+				.getSystemService(Context.NOTIFICATION_SERVICE);
+
+		Intent notIntent = new Intent(context, MainActivity.class);
+		PendingIntent contIntent = PendingIntent.getActivity(context, 0,
+				notIntent, 0);
+
+		NotificationCompat.Builder n = new NotificationCompat.Builder(context)
+				.setContentTitle("RAIN OR SNOW")
+				.setContentText("Rain/Snow")
+				.setSmallIcon(R.drawable.icon_rain_day)
+				.setAutoCancel(true)
+				.setContentIntent(contIntent)
+				.setLargeIcon(
+						(((BitmapDrawable) context.getResources().getDrawable(
+								R.drawable.ic_launcher)).getBitmap()));
+
+		mNotificationManager.notify(0, n.build());
 	}
 
 	private boolean necesaryUpdate() {
