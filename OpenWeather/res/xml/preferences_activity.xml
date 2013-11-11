@@ -5,11 +5,11 @@
         android:summary="@string/settings_summary"
         android:title="@string/settings_title" >
         <CheckBoxPreference
-            android:key="alarms"
-            android:title="@string/alarms" />
-        <CheckBoxPreference
+            android:key="ActiveNotifications"
+            android:title="@string/notifications" />
+        <!-- <CheckBoxPreference
             android:key="autoupdate"
-            android:title="@string/autoupdate" />
+            android:title="@string/autoupdate" /> -->
         <EditTextPreference 
             android:key="date_last_update"
             android:title="@string/date_last_update"
