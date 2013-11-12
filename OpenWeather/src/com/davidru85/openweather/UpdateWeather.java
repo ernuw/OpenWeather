@@ -87,10 +87,11 @@ public class UpdateWeather extends BroadcastReceiver {
 		if (notify == true) {
 			Log.e(LogDavid, "NOTIFICATIONS YES");
 			return true;
+		} else {
+			prefs.edit().putBoolean("ActiveNotifications", false).commit();
+			Log.e(LogDavid, "NOTIFICATIONS NO");
+			return false;
 		}
-		prefs.edit().putBoolean("ActiveNotifications", false).commit();
-		Log.e(LogDavid, "NOTIFICATIONS NO");
-		return false;
 	}
 
 	private void notifyWeather() {
