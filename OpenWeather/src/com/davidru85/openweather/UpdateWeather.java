@@ -83,12 +83,12 @@ public class UpdateWeather extends BroadcastReceiver {
 	}
 
 	private boolean ifNotify() {
-		boolean notify = prefs.getBoolean("ActiveNotifications", false);
+		boolean notify = prefs.getBoolean("ActiveNotifications", true);
 		if (notify == true) {
+			prefs.edit().putBoolean("ActiveNotifications", true).commit();
 			Log.e(LogDavid, "NOTIFICATIONS YES");
 			return true;
 		} else {
-			prefs.edit().putBoolean("ActiveNotifications", false).commit();
 			Log.e(LogDavid, "NOTIFICATIONS NO");
 			return false;
 		}
