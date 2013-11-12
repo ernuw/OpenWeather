@@ -62,12 +62,18 @@ public class UpdateWeather extends BroadcastReceiver {
 							Toast.LENGTH_SHORT);
 					toast2.show();
 
-					if (weather.getRain_threehours() > 0
-							|| weather.getSnow_threehours() > 0) {
-						if (ifNotify()) {
-							notifyWeather();
+					if (ifNotify()) {
+						Notifications notif = new Notifications(context);
+						if (weather.getRain_threehours() > 0
+								&& weather.getSnow_threehours() > 0) {
+							notif.notifyBoth();
+						} else if (weather.getRain_threehours() > 0) {
+							notif.notifyRain();
+						} else if (weather.getSnow_threehours() > 0) {
+							notif.notifySnow();
 						}
 					}
+
 				} else {
 					Toast toast2 = Toast.makeText(context, R.string.no_weather,
 							Toast.LENGTH_SHORT);
@@ -92,27 +98,6 @@ public class UpdateWeather extends BroadcastReceiver {
 			Log.e(LogDavid, "NOTIFICATIONS NO");
 			return false;
 		}
-	}
-
-	private void notifyWeather() {
-		NotificationManager mNotificationManager = (NotificationManager) context
-				.getSystemService(Context.NOTIFICATION_SERVICE);
-
-		Intent notIntent = new Intent(context, MainActivity.class);
-		PendingIntent contIntent = PendingIntent.getActivity(context, 0,
-				notIntent, 0);
-
-		NotificationCompat.Builder n = new NotificationCompat.Builder(context)
-				.setContentTitle("RAIN OR SNOW")
-				.setContentText("Rain/Snow")
-				.setSmallIcon(R.drawable.icon_rain_day)
-				.setAutoCancel(true)
-				.setContentIntent(contIntent)
-				.setLargeIcon(
-						(((BitmapDrawable) context.getResources().getDrawable(
-								R.drawable.ic_launcher)).getBitmap()));
-
-		mNotificationManager.notify(0, n.build());
 	}
 
 	private boolean necesaryUpdate() {
