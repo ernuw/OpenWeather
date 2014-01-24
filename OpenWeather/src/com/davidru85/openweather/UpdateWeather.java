@@ -1,19 +1,14 @@
 package com.davidru85.openweather;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -23,96 +18,92 @@ public class UpdateWeather extends BroadcastReceiver {
 	private Context context;
 	private SharedPreferences prefs;
 	private Location loc;
-	private String URL;
+	private String URLForecast;
 
 	@Override
-	public void onReceive(Context context, Intent intent) {
-		this.context = context;
+	public void onReceive(Context appContext, Intent intent) {
+		context = appContext;
 		loc = Localizator.geoLocate(context);
 		if (loc != null) {
-			URL = Conversor.getUrlWeather(loc);
+			URLForecast = Conversor.getUrlForecast(loc);
 
 			/*
 			 * Toast.makeText(context,
 			 * "¡Vibration Mode On porque el tiempo se ha terminado!",
 			 * Toast.LENGTH_LONG).show();
 			 */
+
 			// Define la vibracion del telefono
+
 			/*
-			 * Vibrator vibrator = (Vibrator)
-			 * context.getSystemService(Context.VIBRATOR_SERVICE);
-			 * vibrator.vibrate(2000);
+			 * Vibrator vibrator = (Vibrator) context
+			 * .getSystemService(Context.VIBRATOR_SERVICE);
+			 * vibrator.vibrate(1000);
 			 */
-			prefs = PreferenceManager.getDefaultSharedPreferences(context);
+			prefs = context.getSharedPreferences(Values.getPrefs(),
+					Context.MODE_PRIVATE);
 			prefs.edit().putBoolean("active", true).commit();
 			check_server();
 		}
 	}
 
 	private void check_server() {
-		JsonParser jsonParser = new JsonParser(URL);
+		JsonParser jsonParser = new JsonParser(URLForecast);
 		WeatherAsyncTask weatherAsyncTask = new WeatherAsyncTask();
+		Editor edit;
 		try {
 			if (necesaryUpdate()) {
-				Weather weather = weatherAsyncTask.execute(jsonParser).get();
-				if (weather != null) {
-					save_weather(weather);
+				Log.d(LogDavid, "NECESITO ACTUALIZAR");
+				Weather weathers[] = weatherAsyncTask.execute(jsonParser).get();
+				int n = Conversor.getNextWeather(weathers);
+				Log.e(LogDavid, "N = " + n);
+				Weather weather = weathers[n + 1];
 
-					Toast toast2 = Toast.makeText(context, R.string.success,
-							Toast.LENGTH_SHORT);
-					toast2.show();
+				save_weather(weathers[n]);
 
-					if (ifNotify()) {
+				/*
+				 * Toast toast2 = Toast.makeText(context, R.string.success,
+				 * Toast.LENGTH_SHORT); toast2.show();
+				 */
+
+				if (weather.getRain_threehours() > 0
+						|| weather.getSnow_threehours() > 0) {
+					Log.d(LogDavid, "NECESITO AVISAR");
+					if (Conversor.ifNotificationAllowed(prefs)) {
+						Log.d(LogDavid, "PUEDO AVISAR");
 						Notifications notif = new Notifications(context);
-						if (weather.getRain_threehours() > 0
-								&& weather.getSnow_threehours() > 0) {
-							notif.notifyBoth();
-						} else if (weather.getRain_threehours() > 0) {
-							notif.notifyRain();
-						} else if (weather.getSnow_threehours() > 0) {
-							notif.notifySnow();
-						}
+						notif.notify(weather);
+					} else {
+						Log.d(LogDavid, "NO PUEDO AVISAR");
 					}
-
 				} else {
-					Toast toast2 = Toast.makeText(context, R.string.no_weather,
-							Toast.LENGTH_SHORT);
-					toast2.show();
-					Log.e(LogDavid, "No Weather");
+					Log.d(LogDavid, "NO NECESITO AVISAR - PREVIOUS FALSE");
+					edit = prefs.edit();
+					edit.putBoolean(Values.getPrevNotif(), false);
+					edit.commit();
 				}
+			} else {
+				Log.d(LogDavid, "NO ACTUALIZO");
 			}
 		} catch (Exception e) {
 			Log.e(LogDavid, "Error Refresh: " + e.toString());
 			e.printStackTrace();
 		}
-
-	}
-
-	private boolean ifNotify() {
-		boolean notify = prefs.getBoolean("ActiveNotifications", true);
-		if (notify == true) {
-			prefs.edit().putBoolean("ActiveNotifications", true).commit();
-			Log.e(LogDavid, "NOTIFICATIONS YES");
-			return true;
-		} else {
-			Log.e(LogDavid, "NOTIFICATIONS NO");
-			return false;
-		}
 	}
 
 	private boolean necesaryUpdate() {
-		prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		prefs = context.getSharedPreferences(Values.getPrefs(),
+				Context.MODE_PRIVATE);
 		long date_last_update = prefs.getLong("date_update", 0) * 1000;
-		if ((System.currentTimeMillis() - date_last_update) < Values.FIFTEEN_MINUTES) {
+		if ((System.currentTimeMillis() - date_last_update) < Values.elapsed_time / 2) {
 			return false;
 		}
+		Log.d(LogDavid, "UPDATE_NECESARY");
 		return true;
 	}
 
 	private void save_weather(Weather weather) {
 		Editor edit = prefs.edit();
 		Conversor.saveWeather(edit, weather);
-
 	}
-
 }
