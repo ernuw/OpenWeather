@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.content.SharedPreferences;
@@ -15,15 +14,6 @@ import android.util.Log;
 public class Conversor {
 	private static final String LogDavid = "OpenWeather";
 
-	private static String coordinates = "coord";
-	private static String system = "sys";
-	private static String weather = "weather";
-	private static String main = "main";
-	private static String wind = "wind";
-	private static String rain = "rain";
-	private static String snow = "snow";
-	private static String clouds = "clouds";
-
 	private static String latitude = "lat";
 	private static String longitude = "lon";
 
@@ -31,7 +21,6 @@ public class Conversor {
 	private static String sunrise = "sunrise";
 	private static String sunset = "sunset";
 
-	private static String weather_id = "id";
 	private static String weather_main = "main";
 	private static String weather_description = "description";
 	private static String weather_icon = "icon";
