@@ -41,7 +41,8 @@ public class MainActivity extends Activity {
 		textTemperature = (TextView) findViewById(R.id.textTemperature);
 		iconWeather = (ImageView) findViewById(R.id.iconWeather);
 
-		prefs = getApplicationContext().getSharedPreferences(Values.getPrefs(), Context.MODE_PRIVATE);
+		prefs = getApplicationContext().getSharedPreferences(Values.getPrefs(),
+				Context.MODE_PRIVATE);
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public class MainActivity extends Activity {
 		super.onResume();
 		preRefresh();
 	}
-	
+
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -96,7 +97,7 @@ public class MainActivity extends Activity {
 			WeatherAsyncTask weatherAsyncTask = new WeatherAsyncTask();
 			try {
 				Weather weather[] = weatherAsyncTask.execute(jsonParser).get();
-				
+
 				if (weather != null) {
 					save_weather(weather[0]);
 					Toast toast2 = Toast.makeText(getApplicationContext(),

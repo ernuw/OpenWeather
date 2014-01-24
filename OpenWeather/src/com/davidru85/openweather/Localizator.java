@@ -103,7 +103,7 @@ public class Localizator {
 
 	public static Location geoLocate(Context myContext) {
 		mLocationManager = (LocationManager) myContext.getSystemService(Context.LOCATION_SERVICE);
-		//Location gpsLocation = null;
+		// Location gpsLocation = null;
 		Location networkLocation = null;
 		mLocationManager.removeUpdates(listener);
 		//gpsLocation = requestUpdatesFromProvider(LocationManager.GPS_PROVIDER,R.string.not_support_gps);

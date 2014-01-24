@@ -224,10 +224,11 @@ public class Conversor {
 		}
 		return 1;
 	}
-	
-	/*public static int getElapsedTime(Weather[] weather) {
-		int actual_weather = getNextWeather(weather);
-		
-		return 0;
-	}*/
+
+	/*
+	 * public static int getElapsedTime(Weather[] weather) { int actual_weather
+	 * = getNextWeather(weather);
+	 * 
+	 * return 0; }
+	 */
 }
