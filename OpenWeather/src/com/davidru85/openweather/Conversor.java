@@ -66,11 +66,11 @@ public class Conversor {
 	public static Weather jsonToWeather(JSONObject datos_object) {
 		return OpenWeatherMapManager.jsonToWeather(datos_object);
 	}
-	
+
 	public static Weather jsonToWeather2(JSONObject datos_object) {
 		return OpenWeatherMapManager.jsonToWeather2(datos_object);
 	}
-	
+
 	public static Weather[] jsonToForecast(JSONObject datos_object) {
 		return OpenWeatherMapManager.jsonToForecast(datos_object);
 	}
@@ -187,7 +187,7 @@ public class Conversor {
 		URL = URL + "&mode=json";
 		return URL;
 	}
-	
+
 	public static String getUrlWeather2(Location loc) {
 		// TODO
 		String URL = Values.getWeatherURL2();
@@ -206,4 +206,39 @@ public class Conversor {
 		URL = URL + "&mode=json";
 		return URL;
 	}
+
+	public static boolean ifNotificationAllowed(SharedPreferences prefs) {
+		boolean notify = prefs.getBoolean("ActiveNotifications", true);
+		String Sprevious = Values.getPrevNotif();
+		boolean previous = prefs.getBoolean(Sprevious, false);
+		Log.d(LogDavid, "PREV: " + previous);
+		if (notify == true) {
+			if (previous == true) {
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	public static int getNextWeather(Weather[] weather) {
+		long actual_time = System.currentTimeMillis();
+		for (int n = 0; n < weather.length; n++) {
+			if (weather[n].getData_receiving() > actual_time) {
+				if (n == 0)
+					return 1;
+				else
+					return n;
+			}
+		}
+		return 1;
+	}
+	
+	/*public static int getElapsedTime(Weather[] weather) {
+		int actual_weather = getNextWeather(weather);
+		
+		return 0;
+	}*/
 }
