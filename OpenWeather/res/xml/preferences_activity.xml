@@ -6,20 +6,22 @@
         android:title="@string/settings_title" >
         <CheckBoxPreference
             android:key="ActiveNotifications"
-            android:title="@string/notifications" />
+            android:title="@string/notifications"
+            android:defaultValue="true" />
         <!-- <CheckBoxPreference
-            android:key="autoupdate"
-            android:title="@string/autoupdate" /> -->
+            android:key="PreviousNotification"
+            android:title="@string/previous_notification"
+            android:editable="false"
+            android:defaultValue="false" />
+             -->
         <EditTextPreference 
             android:key="date_last_update"
             android:title="@string/date_last_update"
-            android:editable="false"
-            android:defaultValue="unknown" />
+            android:editable="false" />
         <EditTextPreference 
             android:key="last_date_server"
             android:title="@string/last_date_server"
-            android:editable="false"
-            android:defaultValue="unknown" />
+            android:editable="false" />
     </PreferenceCategory>
 
 </PreferenceScreen>
