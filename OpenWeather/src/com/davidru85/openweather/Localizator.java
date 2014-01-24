@@ -46,7 +46,8 @@ public class Localizator {
 
 	};
 
-	private static Location getBetterLocation(Location newLocation, Location currentBestLocation) {
+	private static Location getBetterLocation(Location newLocation,
+			Location currentBestLocation) {
 		if (currentBestLocation == null) {
 			// A new location is always better than no location
 			return newLocation;
@@ -111,14 +112,14 @@ public class Localizator {
 			return (getBetterLocation(gpsLocation, networkLocation));
 		} else if (gpsLocation != null) {
 			return (gpsLocation);
-		} else */ if (networkLocation != null) {
+		} else */if (networkLocation != null) {
 			return (networkLocation);
 		} else {
 			return (null);
 		}
 	}
-	
-	public static boolean isProviderEnabled(Context myContext){
+
+	public static boolean isProviderEnabled(Context myContext) {
 		boolean enabled;
 		LocationManager lm = (LocationManager) myContext.getSystemService(Context.LOCATION_SERVICE);
 		enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
@@ -129,8 +130,7 @@ public class Localizator {
 			final int errorResId) {
 		Location location = null;
 		if (mLocationManager.isProviderEnabled(provider)) {
-			mLocationManager.requestLocationUpdates(provider, TEN_SECONDS,
-					TEN_METERS, listener);
+			mLocationManager.requestLocationUpdates(provider, TEN_SECONDS,TEN_METERS, listener);
 			location = mLocationManager.getLastKnownLocation(provider);
 		} else {
 			// Toast.makeText(this, errorResId, Toast.LENGTH_LONG).show();
@@ -138,4 +138,8 @@ public class Localizator {
 		return location;
 	}
 
+	public static void stop() {
+		if (mLocationManager != null)
+			mLocationManager.removeUpdates(listener);
+	}
 }
