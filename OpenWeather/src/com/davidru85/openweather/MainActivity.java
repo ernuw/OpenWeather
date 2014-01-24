@@ -3,9 +3,12 @@ package com.davidru85.openweather;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -42,8 +45,7 @@ public class MainActivity extends Activity {
 		textTemperature = (TextView) findViewById(R.id.textTemperature);
 		iconWeather = (ImageView) findViewById(R.id.iconWeather);
 
-		prefs = PreferenceManager
-				.getDefaultSharedPreferences(getApplicationContext());
+		prefs = getApplicationContext().getSharedPreferences(Values.getPrefs(), Context.MODE_PRIVATE);
 	}
 
 	@Override
@@ -57,13 +59,19 @@ public class MainActivity extends Activity {
 		super.onResume();
 		preRefresh();
 	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Localizator.stop();
+	}
 
 	private void preRefresh() {
 		if (isNetworkAvailable()) {
 			if (isLocationProviderEnabled()) {
 				Location loc = Localizator.geoLocate(getApplicationContext());
 				if (loc != null) {
-					URL = Conversor.getUrlWeather(loc);
+					URL = Conversor.getUrlForecast(loc);
 					refresh();
 				} else {
 					// TODO LOC ES NULO
@@ -91,17 +99,13 @@ public class MainActivity extends Activity {
 			JsonParser jsonParser = new JsonParser(URL);
 			WeatherAsyncTask weatherAsyncTask = new WeatherAsyncTask();
 			try {
-				Weather weather = weatherAsyncTask.execute(jsonParser).get();
+				Weather weather[] = weatherAsyncTask.execute(jsonParser).get();
+				
 				if (weather != null) {
-					save_weather(weather);
+					save_weather(weather[0]);
 					Toast toast2 = Toast.makeText(getApplicationContext(),
 							R.string.success, Toast.LENGTH_SHORT);
 					toast2.show();
-					if (weather.getRain_threehours() > 0
-							|| weather.getSnow_threehours() > 0) {
-						// TODO Probabilidad de lluvia o nieve
-					}
-					Log.e(LogDavid, "ShowInfo");
 					show_info();
 				} else {
 					Toast toast2 = Toast.makeText(getApplicationContext(),
@@ -118,7 +122,6 @@ public class MainActivity extends Activity {
 	}
 
 	private void startServiceWeather() {
-		Log.e(LogDavid, "StartService");
 		Intent i = new Intent(getApplicationContext(), ServiceWeather.class);
 		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		getApplicationContext().startService(i);
@@ -271,6 +274,7 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	public void changeBackground(RelativeLayout rel, Drawable draw) {
 		int sdkValue = Integer.valueOf(android.os.Build.VERSION.SDK);
 		if (sdkValue < 16) {
