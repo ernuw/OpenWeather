@@ -5,8 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 
 public class WeatherStarter extends BroadcastReceiver {
+
+	private static final String LogDavid = "OpenWeather";
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -18,6 +21,7 @@ public class WeatherStarter extends BroadcastReceiver {
 		Editor edit = prefs.edit();
 		edit.putBoolean(Values.getPrevNotif(), false);
 		edit.commit();
+		Log.d(LogDavid, "Prev -> False");
 		
 		context.startService(i);
 	}
