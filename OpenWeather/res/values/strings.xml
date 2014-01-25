@@ -16,7 +16,7 @@
     <string name="location_provider_disabled_text">Do you want to enable it?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    
+
     <!-- MENU -->
     <string name="action_refresh">Refresh</string>
     <string name="action_settings">Settings</string>
@@ -30,12 +30,97 @@
     <string name="date_last_update">Date Last Update</string>
     <string name="last_date_server">Last Date Server</string>
     <string name="previous_notification">PreviousNotification</string>
-    
+
     <!-- NOTIFICATIONS -->
     <string name="rain">RAIN</string>
     <string name="raining">Raining</string>
     <string name="snow">SNOW</string>
     <string name="snowing">Snowing</string>
     <string name="rain_snow">RAIN + SNOW</string>
-    <string name="raining_snowing">Raining and Snowing</string>    
+    <string name="raining_snowing">Raining and Snowing</string>
+
+    <!-- WEATHER CONDITIONS -->
+    <!-- Thunderstorm -->
+    <string name="description_200">Thunderstorm with light rain</string>
+    <string name="description_201">Thunderstorm with rain</string>
+    <string name="description_202">Thunderstorm with heavy rain</string>
+    <string name="description_210">Light thunderstorm</string>
+    <string name="description_211">Thunderstorm</string>
+    <string name="description_212">Heavy thunderstorm</string>
+    <string name="description_221">Ragged thunderstorm</string>
+    <string name="description_230">Thunderstorm with light drizzle</string>
+    <string name="description_231">Thunderstorm with drizzle</string>
+    <string name="description_232">Thunderstorm with heavy drizzle</string>
+    <!-- Drizzle -->
+    <string name="description_300">Light intensity drizzle</string>
+    <string name="description_301">Drizzle</string>
+    <string name="description_302">Heavy intensity drizzle</string>
+    <string name="description_310">Light intensity drizzle rain</string>
+    <string name="description_311">Drizzle rain</string>
+    <string name="description_312">Heavy intensity drizzle rain</string>
+    <string name="description_313">Shower rain and drizzle</string>
+    <string name="description_314">Heavy shower rain and drizzle</string>
+    <string name="description_321">Shower drizzle</string>
+    <!-- Rain -->
+    <string name="description_500">Light rain</string>
+    <string name="description_501">Moderate rain</string>
+    <string name="description_502">Heavy intensity rain</string>
+    <string name="description_503">Very heavy rain</string>
+    <string name="description_504">Extreme rain</string>
+    <string name="description_511">Freezing rain</string>
+    <string name="description_520">Light intensity shower rain</string>
+    <string name="description_521">Shower rain</string>
+    <string name="description_522">Heavy intensity shower rain</string>
+    <string name="description_531">Ragged shower rain</string>
+    <!-- Snow -->
+    <string name="description_600">Light snow</string>
+    <string name="description_601">Snow</string>
+    <string name="description_602">Heavy snow</string>
+    <string name="description_611">Sleet</string>
+    <string name="description_612">Shower sleet</string>
+    <string name="description_615">Light rain and snow</string>
+    <string name="description_616">Rain and snow</string>
+    <string name="description_620">Light shower snow</string>
+    <string name="description_621">Shower snow</string>
+    <string name="description_622">Heavy shower snow</string>
+    <!-- Atmosphere -->
+    <string name="description_701">Mist</string>
+    <string name="description_711">smoke</string>
+    <string name="description_721">haze</string>
+    <string name="description_731">Sand/Dust Whirls</string>
+    <string name="description_741">Fog</string>
+    <string name="description_751">Sand</string>
+    <string name="description_761">Dust</string>
+    <string name="description_762">Volcanic ash</string>
+    <string name="description_771">Squalls</string>
+    <string name="description_781">Tornado</string>
+    <!-- Clouds -->
+    <string name="description_800">Sky is clear</string>
+    <string name="description_801">Few clouds</string>
+    <string name="description_802">Scattered clouds</string>
+    <string name="description_803">Broken clouds</string>
+    <string name="description_804">Overcast clouds</string>
+    <!-- Extreme -->
+    <string name="description_900">Tornado</string>
+    <string name="description_901">Tropical storm</string>
+    <string name="description_902">Hurricane</string>
+    <string name="description_903">Cold</string>
+    <string name="description_904">Hot</string>
+    <string name="description_905">Windy</string>
+    <string name="description_906">Hail</string>
+    <!-- Additionals -->
+    <string name="description_950">Setting</string>
+    <string name="description_951">Calm</string>
+    <string name="description_952">Light breeze</string>
+    <string name="description_953">Gentle Breeze</string>
+    <string name="description_954">Moderate breeze</string>
+    <string name="description_955">Fresh Breeze</string>
+    <string name="description_956">Strong breeze</string>
+    <string name="description_957">High wind, near gale</string>
+    <string name="description_958">Gale</string>
+    <string name="description_959">Severe gale</string>
+    <string name="description_960">Storm</string>
+    <string name="description_961">Violent Storm</string>
+    <string name="description_962">Hurricane</string>
+
 </resources>

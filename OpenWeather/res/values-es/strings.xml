@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">OpenWeather</string>
+
+    <!-- TOAST -->
+    <string name="not_support_gps">GPS No soportado</string>
+    <string name="not_support_network">Red no soportada</string>
+    <string name="internet_error">No Internet Connection</string>
+    <string name="no_weather">Previsión no disponible</string>
+    <string name="no_location">Localización no disponible</string>
+    <string name="success">¡Éxito!</string>
+
+    <!-- AlertDialog -->
+    <string name="location_provider_disabled_title">Geolocalización desactivada</string>
+    <string name="location_provider_disabled_text">¿Quiere activarla?</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+
+    <!-- MENU -->
+    <string name="action_refresh">Actualizar</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="action_about">Acerca de</string>
+
+    <!-- SETTINGS -->
+    <string name="settings_title">Ajustes</string>
+    <string name="settings_summary">Ajustes de OpenWeather</string>
+    <string name="autoupdate">Actualización automática</string>
+    <string name="notifications">Notifiaciones</string>
+    <string name="date_last_update">Date Last Update</string>
+    <string name="last_date_server">Last Date Server</string>
+    <string name="previous_notification">PreviousNotification</string>
+
+    <!-- NOTIFICATIONS -->
+    <string name="rain">LLUVIA</string>
+    <string name="raining">Lluvia</string>
+    <string name="snow">NIEVE</string>
+    <string name="snowing">Nieve</string>
+    <string name="rain_snow">LLUVIA Y NIEVE</string>
+    <string name="raining_snowing">Lluvia y nieve</string>
+
+    <!-- WEATHER CONDITIONS -->
+    <!-- Thunderstorm -->
+    <string name="description_200">Tormenta eléctrica con lluvia ligera</string>
+    <string name="description_201">Tormenta eléctrica con lluvia</string>
+    <string name="description_202">Tormenta eléctrica con lluvia intensa</string>
+    <string name="description_210">Tormenta eléctrica ligera</string>
+    <string name="description_211">Tormenta eléctrica</string>
+    <string name="description_212">Fuerte tormenta eléctrica</string>
+    <string name="description_221">Tormenta eléctrica desigual</string>
+    <string name="description_230">Tormenta eléctrica con llovizna ligera</string>
+    <string name="description_231">Tormenta eléctrica con llovizna</string>
+    <string name="description_232">Tormenta eléctrica con llovizna intensa</string>
+    <!-- Drizzle -->
+    <string name="description_300">Llovizna ligera</string>
+    <string name="description_301">Llovizna</string>
+    <string name="description_302">Llovizna de gran intensidad</string>
+    <string name="description_310">Lluvia y llovizna ligera</string>
+    <string name="description_311">Lluvia y llovizna</string>
+    <string name="description_312">Lluvia y llovizna de gran intensidad</string>
+    <!-- <string name="description_313">Shower rain and drizzle</string>
+    <string name="description_314">Heavy shower rain and drizzle</string> -->
+    <string name="description_321">Llovizna de ducha</string>
+    <!-- Rain -->
+    <string name="description_500">Lluvia ligera</string>
+    <string name="description_501">Lluvia moderada</string>
+    <string name="description_502">Lluvia de gran intensidad</string>
+    <string name="description_503">Lluvia muy fuerte</string>
+    <string name="description_504">Lluvia muy fuerte</string>
+    <string name="description_511">Lluvia helada</string>
+    <string name="description_520">lluvia de ducha de intensidad de luz</string>
+    <string name="description_521">lluvia de ducha</string>
+    <string name="description_522">lluvia de ducha de gran intensidad</string>
+    <!--<string name="description_531">Ragged shower rain</string>-->
+    <!-- Snow -->
+    <string name="description_600">Nevada ligera</string>
+    <string name="description_601">Nieve</string>
+    <string name="description_602">Nevada intensa</string>
+    <string name="description_611">Aguanieve</string>
+    <!-- <string name="description_612">Shower sleet</string>
+    <string name="description_615">Light rain and snow</string>
+    <string name="description_616">Rain and snow</string>
+    <string name="description_620">Light shower snow</string> -->
+    <string name="description_621">Nieve de ducha</string>
+    <!-- <string name="description_622">Heavy shower snow</string> -->
+    <!-- Atmosphere -->
+    <string name="description_701">Niebla</string>
+    <string name="description_711">Humo</string>
+    <string name="description_721">Niebla</string>
+    <string name="description_731">Torbellinos de arena/polvo</string>
+    <string name="description_741">Bruma</string>
+    <string name="description_751">Arenisca</string>
+    <string name="description_761">Polvareda</string>
+    <string name="description_762">Ceniza volcánica</string>
+    <!-- <string name="description_771">Squalls</string> -->
+    <string name="description_781">Tornado</string>
+    <!-- Clouds -->
+    <string name="description_800">Cielo claro</string>
+    <string name="description_801">Algo de nubes</string>
+    <string name="description_802">Nubes dispersas</string>
+    <string name="description_803">Nubes rotas</string>
+    <string name="description_804">Nubes</string>
+    <!-- Extreme -->
+    <string name="description_900">Tornado</string>
+    <string name="description_901">Tormenta tropical</string>
+    <string name="description_902">Huracán</string>
+    <string name="description_903">Frío</string>
+    <string name="description_904">Calor</string>
+    <string name="description_905">Ventoso</string>
+    <string name="description_906">Granizo</string>
+    <!-- Additionals -->
+    <string name="description_950">Setting</string>
+    <string name="description_951">Calma</string>
+    <string name="description_952">Viento flojo</string>
+    <string name="description_953">Viento suave</string>
+    <string name="description_954">Viento moderado</string>
+    <string name="description_955">Brisa</string>
+    <string name="description_956">Viento fuerte</string>
+    <string name="description_957">Viento fuerte, próximo a vendaval</string>
+    <string name="description_958">Vendaval</string>
+    <string name="description_959">Vendaval fuerte</string>
+    <string name="description_960">Tempestad</string>
+    <string name="description_961">Tempestad violenta</string>
+    <string name="description_962">Huracán</string>
+
+</resources>
