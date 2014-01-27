@@ -80,7 +80,6 @@ public class Notifications {
 		calendar.setTimeInMillis(System.currentTimeMillis());
 		int hour = calendar.get(Calendar.HOUR_OF_DAY);
 		alert = Conversor.soundVibrationAvailable(hour, prefs);
-		Log.d(LogDavid, "HORA: " + hour);
 
 		if (weather_id >= 200 && weather_id <= 232) {
 			if (weather_id == 200) {

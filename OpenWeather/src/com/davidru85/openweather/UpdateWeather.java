@@ -54,7 +54,6 @@ public class UpdateWeather extends BroadcastReceiver {
 				Log.d(LogDavid, "NECESITO ACTUALIZAR");
 				Weather weathers[] = weatherAsyncTask.execute(jsonParser).get();
 				int n = Conversor.getNextWeather(weathers);
-				Log.e(LogDavid, "N = " + n);
 				Weather weather = weathers[n + 1];
 
 				save_weather(weathers[n]);
