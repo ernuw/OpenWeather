@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningServiceInfo;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -69,7 +71,11 @@ public class MainActivity extends Activity {
 				Location loc = Localizator.geoLocate(getApplicationContext());
 				if (loc != null) {
 					URL = Conversor.getUrlForecast(loc);
-					refresh();
+					if (!isMyServiceRunning()) {
+						refresh();
+					} else {
+						show_info();
+					}
 				} else {
 					// TODO LOC ES NULO
 					noLocation();
@@ -102,7 +108,7 @@ public class MainActivity extends Activity {
 					save_weather(weather[0]);
 					Toast toast2 = Toast.makeText(getApplicationContext(),
 							R.string.success, Toast.LENGTH_SHORT);
-					toast2.show();
+					// toast2.show();
 					show_info();
 				} else {
 					Toast toast2 = Toast.makeText(getApplicationContext(),
@@ -122,6 +128,20 @@ public class MainActivity extends Activity {
 		Intent i = new Intent(getApplicationContext(), ServiceWeather.class);
 		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		getApplicationContext().startService(i);
+	}
+
+	private boolean isMyServiceRunning() {
+		ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+		for (RunningServiceInfo service : manager
+				.getRunningServices(Integer.MAX_VALUE)) {
+			if (ServiceWeather.class.getName().equals(
+					service.service.getClassName())) {
+				Log.d(LogDavid, "RUNNING");
+				return true;
+			}
+		}
+		Log.d(LogDavid, "NOT RUNNING");
+		return false;
 	}
 
 	private void save_weather(Weather weather) {
