@@ -26,7 +26,7 @@
     <string name="settings_title">Ajustes</string>
     <string name="settings_summary">Ajustes de OpenWeather</string>
     <string name="autoupdate">Actualización automática</string>
-    <string name="notifications">Notifiaciones</string>
+    <string name="notifications">Notificaciones</string>
     <string name="date_last_update">Date Last Update</string>
     <string name="last_date_server">Last Date Server</string>
     <string name="previous_notification">PreviousNotification</string>
@@ -58,8 +58,10 @@
     <string name="description_310">Lluvia y llovizna ligera</string>
     <string name="description_311">Lluvia y llovizna</string>
     <string name="description_312">Lluvia y llovizna de gran intensidad</string>
-    <!-- <string name="description_313">Shower rain and drizzle</string>
-    <string name="description_314">Heavy shower rain and drizzle</string> -->
+    <!--
+    <string name="description_313">Shower rain and drizzle</string>
+    <string name="description_314">Heavy shower rain and drizzle</string>
+    -->
     <string name="description_321">Llovizna de ducha</string>
     <!-- Rain -->
     <string name="description_500">Lluvia ligera</string>
@@ -71,16 +73,18 @@
     <string name="description_520">lluvia de ducha de intensidad de luz</string>
     <string name="description_521">lluvia de ducha</string>
     <string name="description_522">lluvia de ducha de gran intensidad</string>
-    <!--<string name="description_531">Ragged shower rain</string>-->
+    <!-- <string name="description_531">Ragged shower rain</string> -->
     <!-- Snow -->
     <string name="description_600">Nevada ligera</string>
     <string name="description_601">Nieve</string>
     <string name="description_602">Nevada intensa</string>
     <string name="description_611">Aguanieve</string>
-    <!-- <string name="description_612">Shower sleet</string>
+    <!--
+    <string name="description_612">Shower sleet</string>
     <string name="description_615">Light rain and snow</string>
     <string name="description_616">Rain and snow</string>
-    <string name="description_620">Light shower snow</string> -->
+    <string name="description_620">Light shower snow</string>
+    -->
     <string name="description_621">Nieve de ducha</string>
     <!-- <string name="description_622">Heavy shower snow</string> -->
     <!-- Atmosphere -->
