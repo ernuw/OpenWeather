@@ -5,6 +5,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 
 public class Localizator {
 
@@ -18,6 +19,8 @@ public class Localizator {
 	private static final int TEN_METERS = 10;
 	private static final int TWO_MINUTES = 1000 * 60 * 2;
 
+	protected static final String LogDavid = "OpenWeather";
+
 	private static final LocationListener listener = new LocationListener() {
 
 		@Override
@@ -29,13 +32,13 @@ public class Localizator {
 		@Override
 		public void onProviderDisabled(String provider) {
 			// TODO Auto-generated method stub
-
+			Log.d(LogDavid, "PROVIDER DISABLED");
 		}
 
 		@Override
 		public void onProviderEnabled(String provider) {
 			// TODO Auto-generated method stub
-
+			Log.d(LogDavid, "PROVIDER ENABLED");
 		}
 
 		@Override
@@ -103,16 +106,16 @@ public class Localizator {
 
 	public static Location geoLocate(Context myContext) {
 		mLocationManager = (LocationManager) myContext.getSystemService(Context.LOCATION_SERVICE);
-		// Location gpsLocation = null;
+		Location pasiveLocation = null;
 		Location networkLocation = null;
 		mLocationManager.removeUpdates(listener);
-		//gpsLocation = requestUpdatesFromProvider(LocationManager.GPS_PROVIDER,R.string.not_support_gps);
+		pasiveLocation = requestUpdatesFromProvider(LocationManager.PASSIVE_PROVIDER,R.string.not_support_gps);
 		networkLocation = requestUpdatesFromProvider(LocationManager.NETWORK_PROVIDER, R.string.not_support_network);
-		/*if (gpsLocation != null && networkLocation != null) {
-			return (getBetterLocation(gpsLocation, networkLocation));
-		} else if (gpsLocation != null) {
-			return (gpsLocation);
-		} else */if (networkLocation != null) {
+		if (pasiveLocation != null && networkLocation != null) {
+			return (getBetterLocation(pasiveLocation, networkLocation));
+		} else if (pasiveLocation != null) {
+			return (pasiveLocation);
+		} else if (networkLocation != null) {
 			return (networkLocation);
 		} else {
 			return (null);
