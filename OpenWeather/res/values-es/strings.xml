@@ -27,9 +27,9 @@
     <string name="settings_summary">Ajustes de OpenWeather</string>
     <string name="autoupdate">Actualización automática</string>
     <string name="notifications">Notificaciones</string>
-    <string name="date_last_update">Date Last Update</string>
-    <string name="last_date_server">Last Date Server</string>
-    <string name="previous_notification">PreviousNotification</string>
+    <string name="date_last_update">Última actualización</string>
+    <string name="last_date_server">Última fecha servidor</string>
+    <string name="previous_notification">Notificación previa</string>
 
     <!-- NOTIFICATIONS -->
     <string name="rain">LLUVIA</string>
