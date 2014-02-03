@@ -216,16 +216,16 @@ public class Conversor {
 		long actual_time = System.currentTimeMillis();
 		for (int n = 0; n < weather.length; n++) {
 			if (weather[n].getData_receiving() > actual_time) {
-				if (n == 0)
-					return 1;
-				else
-					return n;
+				Log.d(LogDavid, "NEXT WEATHER: " + n);
+				return n;
 			}
 		}
+		Log.d(LogDavid, "NEXT WEATHER: 1");
 		return 1;
 	}
 
-	public static boolean soundVibrationAvailable(int hour, SharedPreferences prefs) {
+	public static boolean soundVibrationAvailable(int hour,
+			SharedPreferences prefs) {
 		if (hour > 0 && hour < 8)
 			return false;
 		else
