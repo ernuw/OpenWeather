@@ -45,6 +45,25 @@ public class Notifications {
 		contIntent = PendingIntent.getActivity(context, 0, notIntent, 0);
 	}
 
+	public void providerDisabled() {
+		n = new NotificationCompat.Builder(context)
+				.setContentTitle("PROVIDER DISABLED")
+				.setContentText("ALERT")
+				.setSmallIcon(R.drawable.ic_launcher)
+				.setAutoCancel(true)
+				.setContentIntent(contIntent)
+				.setWhen(System.currentTimeMillis())
+				.setLargeIcon(
+						(((BitmapDrawable) context.getResources().getDrawable(
+								R.drawable.ic_launcher)).getBitmap()));
+		if (alert) {
+			n.setSound(RingtoneManager
+					.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+			n.setVibrate(vibrate);
+		}
+		mNotificationManager.notify(0, n.build());
+	}
+
 	public void notify(Weather weather) {
 		edit = prefs.edit();
 		edit.putBoolean(Values.getPrevNotif(), true);
@@ -57,6 +76,7 @@ public class Notifications {
 				.setContentText(description)
 				.setSmallIcon(icon)
 				.setAutoCancel(true)
+				.setWhen(System.currentTimeMillis())
 				.setContentIntent(contIntent)
 				.setLargeIcon(
 						(((BitmapDrawable) context.getResources().getDrawable(
