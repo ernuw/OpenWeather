@@ -42,6 +42,14 @@ public class UpdateWeather extends BroadcastReceiver {
 					Context.MODE_PRIVATE);
 			prefs.edit().putBoolean("active", true).commit();
 			check_server();
+		} else {
+			Log.e(LogDavid, "LOC NULL");
+			if (!Localizator.isProviderEnabled(appContext)) {
+				Notifications notif = new Notifications(appContext);
+				notif.providerDisabled();
+			} else {
+
+			}
 		}
 	}
 
@@ -54,17 +62,18 @@ public class UpdateWeather extends BroadcastReceiver {
 				Log.d(LogDavid, "NECESITO ACTUALIZAR");
 				Weather weathers[] = weatherAsyncTask.execute(jsonParser).get();
 				int n = Conversor.getNextWeather(weathers);
-				Weather weather = weathers[n + 1];
-
-				save_weather(weathers[n]);
+				Weather weather = weathers[n];
+				if (n > 0)
+					save_weather(weathers[n - 1]);
+				else
+					save_weather(weathers[0]);
 
 				/*
 				 * Toast toast2 = Toast.makeText(context, R.string.success,
 				 * Toast.LENGTH_SHORT); toast2.show();
 				 */
 
-				if (weather.getRain_threehours() > 0
-						|| weather.getSnow_threehours() > 0) {
+				if (weather.getRain_threehours() > 0 || weather.getSnow_threehours() > 0) {
 					Log.d(LogDavid, "NECESITO AVISAR");
 					if (Conversor.ifNotificationAllowed(prefs)) {
 						Log.d(LogDavid, "PUEDO AVISAR");
