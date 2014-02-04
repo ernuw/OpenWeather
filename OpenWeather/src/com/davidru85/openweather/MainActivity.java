@@ -106,6 +106,7 @@ public class MainActivity extends Activity {
 
 				if (weather != null) {
 					save_weather(weather[0]);
+					Log.d(LogDavid, "SAVE");
 					Toast toast2 = Toast.makeText(getApplicationContext(),
 							R.string.success, Toast.LENGTH_SHORT);
 					// toast2.show();

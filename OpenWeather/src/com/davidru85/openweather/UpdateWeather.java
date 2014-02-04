@@ -72,8 +72,9 @@ public class UpdateWeather extends BroadcastReceiver {
 				 * Toast toast2 = Toast.makeText(context, R.string.success,
 				 * Toast.LENGTH_SHORT); toast2.show();
 				 */
-
-				if (weather.getRain_threehours() > 0 || weather.getSnow_threehours() > 0) {
+				
+				//if (weather.getRain_threehours() > 0 || weather.getSnow_threehours() > 0) {
+				if (notificationNeeded(weather)) {
 					Log.d(LogDavid, "NECESITO AVISAR");
 					if (Conversor.ifNotificationAllowed(prefs)) {
 						Log.d(LogDavid, "PUEDO AVISAR");
@@ -95,6 +96,10 @@ public class UpdateWeather extends BroadcastReceiver {
 			Log.e(LogDavid, "Error Refresh: " + e.toString());
 			e.printStackTrace();
 		}
+	}
+
+	private boolean notificationNeeded(Weather weather) {
+		return (weather.getRain_threehours() > 0 || weather.getSnow_threehours() > 0);
 	}
 
 	private boolean necesaryUpdate() {
