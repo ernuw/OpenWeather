@@ -6,20 +6,29 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity"
+    tools:ignore="Orientation" >
 
-    <!--
-    <TextView
-        android:id="@+id/text"
+    <LinearLayout
+        android:id="@+id/linearName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    -->
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" >
+
+        <TextView
+            android:id="@+id/authorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/author_name"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayoutSocial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/linearName"
         android:layout_centerHorizontal="true" >
 
         <ImageButton
@@ -27,32 +36,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/profile_facebook"
-            android:onClick="profileFacebook" />
+            android:onClick="profileFacebook"
+            android:src="@drawable/profile_facebook" />
 
         <ImageButton
             android:id="@+id/profile_google"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/profile_google"
-            android:onClick="profileGoogle" />
+            android:onClick="profileGoogle"
+            android:src="@drawable/profile_google" />
 
         <ImageButton
             android:id="@+id/profile_twitter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/profile_twitter"
-            android:onClick="profileTwitter" />
+            android:onClick="profileTwitter"
+            android:src="@drawable/profile_twitter" />
 
         <ImageButton
             android:id="@+id/profile_linkedin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/profile_linkedin"
-            android:onClick="profileLinkedin" />
+            android:onClick="profileLinkedin"
+            android:src="@drawable/profile_linkedin" />
     </LinearLayout>
 
 </RelativeLayout>
