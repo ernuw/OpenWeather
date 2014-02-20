@@ -5,23 +5,36 @@
         android:summary="@string/settings_summary"
         android:title="@string/settings_title" >
         <CheckBoxPreference
+            android:defaultValue="true"
             android:key="ActiveNotifications"
-            android:title="@string/notifications"
-            android:defaultValue="true" />
-        <!-- <CheckBoxPreference
-            android:key="PreviousNotification"
-            android:title="@string/previous_notification"
+            android:title="@string/notifications" />
+        <!--
+        <EditTextPreference
             android:editable="false"
-            android:defaultValue="false" />
-             -->
-        <EditTextPreference 
             android:key="date_last_update"
-            android:title="@string/date_last_update"
-            android:editable="false" />
-        <EditTextPreference 
+            android:title="@string/date_last_update" />
+        <EditTextPreference
+            android:editable="false"
             android:key="last_date_server"
-            android:title="@string/last_date_server"
-            android:editable="false" />
+            android:title="@string/last_date_server" />
+        -->
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/settings_about" >
+        <Preference
+            android:key="author_screen"
+            android:title="@string/settings_author" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetClass="com.davidru85.openweather.About"
+                android:targetPackage="com.davidru85.openweather" />
+        </Preference>
+        <Preference
+            android:key="market_screen"
+            android:title="@string/settings_related_apps" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="market://search?q=pub:David%20Ruiz%20Urraca" />
+        </Preference>
     </PreferenceCategory>
 
 </PreferenceScreen>

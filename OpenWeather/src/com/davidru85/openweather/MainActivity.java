@@ -151,7 +151,9 @@ public class MainActivity extends Activity {
 	}
 
 	private void show_info() {
+		Log.d(LogDavid, "SHOW");
 		if (prefs.getBoolean("already_iniciated", false)) {
+			Log.d(LogDavid, "IF");
 			Weather weather = Conversor.getWeather(prefs);
 			if (weather != null && weather.getData_receiving() != 0) {
 				long weatherId = weather.getWeather_id();
@@ -308,11 +310,6 @@ public class MainActivity extends Activity {
 		toast2.show();
 	}
 
-	private void about() {
-		Intent aboutIntent = new Intent(MainActivity.this, About.class);
-		startActivity(aboutIntent);
-	}
-
 	private void settings() {
 		Intent settingsIntent = new Intent(MainActivity.this,
 				WeatherPreferences.class);
@@ -326,9 +323,6 @@ public class MainActivity extends Activity {
 			return true;
 		} else if (itemId == R.id.action_settings) {
 			settings();
-			return true;
-		} else if (itemId == R.id.action_about) {
-			about();
 			return true;
 		} else {
 			return super.onOptionsItemSelected(item);
