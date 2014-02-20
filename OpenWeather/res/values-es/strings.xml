@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">OpenWeather</string>
+    <string name="app_name">Tiempo OpenWeather</string>
 
     <!-- TOAST -->
     <string name="not_support_gps">GPS No soportado</string>
@@ -20,10 +20,12 @@
     <!-- MENU -->
     <string name="action_refresh">Actualizar</string>
     <string name="action_settings">Ajustes</string>
-    <string name="action_about">Acerca de</string>
 
     <!-- SETTINGS -->
     <string name="settings_title">Ajustes</string>
+    <string name="settings_about">Acerca de</string>
+    <string name="settings_author">Autor</string>
+    <string name="settings_related_apps">Apps relacionadas</string>
     <string name="settings_summary">Ajustes de OpenWeather</string>
     <string name="autoupdate">Actualización automática</string>
     <string name="notifications">Notificaciones</string>
