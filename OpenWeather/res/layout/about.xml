@@ -35,7 +35,6 @@
             android:id="@+id/profile_facebook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:onClick="profileFacebook"
             android:src="@drawable/profile_facebook" />
 
@@ -43,7 +42,6 @@
             android:id="@+id/profile_google"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:onClick="profileGoogle"
             android:src="@drawable/profile_google" />
 
@@ -51,7 +49,6 @@
             android:id="@+id/profile_twitter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:onClick="profileTwitter"
             android:src="@drawable/profile_twitter" />
 
@@ -59,7 +56,6 @@
             android:id="@+id/profile_linkedin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:onClick="profileLinkedin"
             android:src="@drawable/profile_linkedin" />
     </LinearLayout>
