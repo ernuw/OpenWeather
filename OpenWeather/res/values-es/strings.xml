@@ -32,6 +32,7 @@
     <string name="date_last_update">Última actualización</string>
     <string name="last_date_server">Última fecha servidor</string>
     <string name="previous_notification">Notificación previa</string>
+    <string name="app_version">Versión App</string>
 
     <!-- NOTIFICATIONS -->
     <string name="rain">LLUVIA</string>
