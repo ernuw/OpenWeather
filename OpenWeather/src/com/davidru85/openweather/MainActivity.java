@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -16,6 +17,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.Menu;
@@ -311,6 +313,17 @@ public class MainActivity extends Activity {
 	}
 
 	private void settings() {
+		Editor edit = prefs.edit();
+		String versionName;
+		try {
+			versionName = getPackageManager().getPackageInfo(getPackageName(),
+					0).versionName;
+		} catch (NameNotFoundException e) {
+			Log.d(LogDavid, e.toString());
+			versionName = "Null";
+		}
+		edit.putString("appVersion", versionName);
+		edit.commit();
 		Intent settingsIntent = new Intent(MainActivity.this,
 				WeatherPreferences.class);
 		startActivity(settingsIntent);
