@@ -35,6 +35,10 @@
                 android:action="android.intent.action.VIEW"
                 android:data="market://search?q=pub:David%20Ruiz%20Urraca" />
         </Preference>
+
+        <EditTextPreference
+            android:key="appVersion"
+            android:title="@string/app_version" />
     </PreferenceCategory>
 
 </PreferenceScreen>
