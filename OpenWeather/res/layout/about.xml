@@ -24,40 +24,83 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/linearLayoutSocial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearName"
+        android:layout_marginTop="17dp"
         android:layout_centerHorizontal="true" >
-
-        <ImageButton
-            android:id="@+id/profile_facebook"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="profileFacebook"
-            android:src="@drawable/profile_facebook" />
 
         <ImageButton
             android:id="@+id/profile_google"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="17dp"
             android:onClick="profileGoogle"
             android:src="@drawable/profile_google" />
+
+        <TextView
+            android:id="@+id/text_google"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/profile_google"
+            android:layout_below="@+id/profile_google"
+            android:text="@string/text_google" />
 
         <ImageButton
             android:id="@+id/profile_twitter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_toRightOf="@+id/profile_google"
             android:onClick="profileTwitter"
             android:src="@drawable/profile_twitter" />
+
+        <TextView
+            android:id="@+id/text_twitter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/profile_twitter"
+            android:layout_below="@+id/profile_twitter"
+            android:text="@string/text_twitter" />
 
         <ImageButton
             android:id="@+id/profile_linkedin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="17dp"
+            android:layout_below="@+id/text_google"
+            android:layout_marginTop="17dp"
             android:onClick="profileLinkedin"
             android:src="@drawable/profile_linkedin" />
-    </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_linkedin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/profile_linkedin"
+            android:layout_below="@+id/profile_linkedin"
+            android:text="@string/text_linkedin" />
+
+        <ImageButton
+            android:id="@+id/profile_github"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_below="@+id/text_twitter"
+            android:layout_toRightOf="@+id/profile_linkedin"
+            android:layout_marginTop="17dp"
+            android:onClick="profileGithub"
+            android:src="@drawable/profile_github" />
+
+        <TextView
+            android:id="@+id/text_github"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/profile_github"
+            android:layout_below="@+id/profile_github"
+            android:text="@string/text_github" />
+    </RelativeLayout>
 
 </RelativeLayout>

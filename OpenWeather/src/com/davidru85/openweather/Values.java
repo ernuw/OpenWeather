@@ -18,8 +18,9 @@ public class Values {
 	private static final String profileFacebook = "http://facebook.com/davidru85";
 	private static final String profileGoogle = "https://plus.google.com/115987355481602001725";
 	private static final String profileLinkedin = "http://linkedin.com/in/davidru85/";
+	private static final String profileGithub = "https://github.com/davidru85";
 
-	private static final String PREFS = "preferences_activity";
+	private static final String PREFS = "com.davidru85.openweather_preferences";
 
 	private static final String prev_notif = "PreviousNotification";
 
@@ -53,6 +54,10 @@ public class Values {
 
 	public static String getProfilelinkedin() {
 		return profileLinkedin;
+	}
+	
+	public static String getProfilegithub() {
+		return profileGithub;
 	}
 
 	public static String getPrefs() {

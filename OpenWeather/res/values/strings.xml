@@ -33,6 +33,11 @@
     <string name="date_last_update">Date Last Update</string>
     <string name="last_date_server">Last Date Server</string>
     <string name="previous_notification">PreviousNotification</string>
+    <string name="app_version">App Version</string>
+    <string name="text_google">Google+</string>
+    <string name="text_twitter">Twitter</string>
+    <string name="text_linkedin">LinkedIn</string>
+    <string name="text_github">Github</string>
 
     <!-- NOTIFICATIONS -->
     <string name="rain">RAIN</string>
