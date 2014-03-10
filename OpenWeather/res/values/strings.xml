@@ -9,6 +9,7 @@
     <string name="not_support_network">Not Support NetWork</string>
     <string name="internet_error">No Internet Connection</string>
     <string name="no_weather">No Weather</string>
+    <string name="alert">Alert!</string>
     <string name="no_location">No Location</string>
     <string name="success">Success!</string>
 

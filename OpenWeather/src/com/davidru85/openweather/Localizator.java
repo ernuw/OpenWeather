@@ -125,7 +125,7 @@ public class Localizator {
 	public static boolean isProviderEnabled(Context myContext) {
 		boolean enabled;
 		LocationManager lm = (LocationManager) myContext.getSystemService(Context.LOCATION_SERVICE);
-		enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+		enabled = (lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER) || lm.isProviderEnabled(LocationManager.PASSIVE_PROVIDER));
 		return enabled;
 	}
 

@@ -47,8 +47,8 @@ public class Notifications {
 
 	public void providerDisabled() {
 		n = new NotificationCompat.Builder(context)
-				.setContentTitle("PROVIDER DISABLED")
-				.setContentText("ALERT")
+				.setContentTitle(context.getResources().getString(R.string.no_location))
+				.setContentText(context.getResources().getString(R.string.alert))
 				.setSmallIcon(R.drawable.ic_launcher)
 				.setAutoCancel(true)
 				.setContentIntent(contIntent)

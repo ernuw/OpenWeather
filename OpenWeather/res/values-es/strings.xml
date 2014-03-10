@@ -8,6 +8,7 @@
     <string name="not_support_network">Red no soportada</string>
     <string name="internet_error">Sin conexión a Internet</string>
     <string name="no_weather">Previsión no disponible</string>
+    <string name="alert">Alerta</string>
     <string name="no_location">Localización no disponible</string>
     <string name="success">¡Éxito!</string>
 
