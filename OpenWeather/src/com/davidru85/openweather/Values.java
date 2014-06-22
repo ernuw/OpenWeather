@@ -7,7 +7,7 @@ public class Values {
 	public static final long TEN_SECONDS = 1000 * 10;
 	public static final long TEN_MINUTES = 1000 * 60 * 10;
 
-	public static final long elapsed_time = ONE_HOUR;
+	public static final long elapsed_time = ONE_MINUTE;
 
 	private static final String weatherURL = "http://api.openweathermap.org/data/2.5/weather?";
 	private static final String weatherURL2 = "http://api.openweathermap.org/data/2.5/find?cnt=1&";
@@ -23,6 +23,7 @@ public class Values {
 	private static final String PREFS = "com.davidru85.openweather_preferences";
 
 	private static final String prev_notif = "PreviousNotification";
+	private static final String active_notif = "ActiveNotifications";
 
 	public static long getElapsedTime() {
 		return elapsed_time;
@@ -66,5 +67,9 @@ public class Values {
 
 	public static String getPrevNotif() {
 		return prev_notif;
+	}
+
+	public static String getActiveNotif() {
+		return active_notif;
 	}
 }

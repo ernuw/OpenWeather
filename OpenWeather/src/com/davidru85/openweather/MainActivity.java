@@ -71,6 +71,8 @@ public class MainActivity extends Activity {
 		if (isNetworkAvailable()) {
 			if (isLocationProviderEnabled()) {
 				Location loc = Localizator.geoLocate(getApplicationContext());
+				//loc.setLatitude(60.17332440000001);
+				//loc.setLongitude(24.941024800000037);
 				if (loc != null) {
 					URL = Conversor.getUrlForecast(loc);
 					if (!isMyServiceRunning()) {

@@ -1,13 +1,18 @@
 package com.davidru85.openweather;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Locale;
 
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.util.Log;
 
@@ -47,6 +52,8 @@ public class Conversor {
 	private static String city_id = "id";
 	private static String city_name = "name";
 	private static String code = "cod";
+	
+	private static Geocoder geocoder;
 
 	public static double kelvinToCelsius(double temperature) {
 		return (temperature - 273.15);
@@ -231,4 +238,26 @@ public class Conversor {
 		else
 			return true;
 	}
+	
+	public static String locationToAddress(Location loc, Context context) {
+        try {
+                double latitude, longitude;
+                String addressText = "";
+                geocoder = new Geocoder(context);
+                latitude = loc.getLatitude();
+                longitude = loc.getLongitude();
+                List<Address> list = geocoder.getFromLocation(latitude, longitude,
+                                1);
+
+                if (list != null && list.size() > 0) {
+                        Address address = list.get(0);
+                        addressText = String.format("%s",address.getLocality());
+                }
+
+                return addressText;
+        } catch (IOException e) {
+                Log.e(LogDavid, "ERROR:" + e.toString());
+                return "";
+        }
+}
 }

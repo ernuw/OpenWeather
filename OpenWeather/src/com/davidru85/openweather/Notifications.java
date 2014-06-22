@@ -2,11 +2,13 @@ package com.davidru85.openweather;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Random;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.app.PendingIntent;
 import android.content.SharedPreferences;
 //import android.content.SharedPreferences.Editor;
 import android.graphics.drawable.BitmapDrawable;
@@ -19,6 +21,7 @@ public class Notifications {
 	private static final String LogDavid = "OpenWeather";
 
 	private NotificationManager mNotificationManager;
+	private int id;
 	private Intent notIntent;
 	private PendingIntent contIntent;
 	private Context context;
@@ -33,6 +36,8 @@ public class Notifications {
 
 	public Notifications(Context appContext) {
 		context = appContext;
+		
+		id = randomId();
 
 		prefs = context.getSharedPreferences(Values.getPrefs(),
 				Context.MODE_PRIVATE);
@@ -44,9 +49,16 @@ public class Notifications {
 		notIntent = new Intent(context, MainActivity.class);
 		contIntent = PendingIntent.getActivity(context, 0, notIntent, 0);
 	}
+	
+	private int randomId(){
+		Random random = new Random();
+		int randomNumber = random.nextInt(9999 - 0);
+		return randomNumber;
+	}
 
 	public void providerDisabled() {
 		n = new NotificationCompat.Builder(context)
+				.setDefaults(NotificationCompat.PRIORITY_DEFAULT)
 				.setContentTitle(context.getResources().getString(R.string.no_location))
 				.setContentText(context.getResources().getString(R.string.alert))
 				.setSmallIcon(R.drawable.ic_launcher)
@@ -61,7 +73,7 @@ public class Notifications {
 					.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
 			n.setVibrate(vibrate);
 		}
-		mNotificationManager.notify(0, n.build());
+		mNotificationManager.notify(id, n.build());
 	}
 
 	public void notify(Weather weather) {
@@ -69,6 +81,9 @@ public class Notifications {
 		edit.putBoolean(Values.getPrevNotif(), true);
 		edit.commit();
 
+		Intent intent1 = new Intent(context, WeatherPreferences.class);
+	    PendingIntent pIntentSettings = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_CANCEL_CURRENT);
+		
 		getValuesNotification(weather);
 
 		n = new NotificationCompat.Builder(context)
@@ -78,6 +93,13 @@ public class Notifications {
 				.setAutoCancel(true)
 				.setWhen(System.currentTimeMillis())
 				.setContentIntent(contIntent)
+				
+				
+				.addAction(R.drawable.ic_refresh, "Refresh", getRefreshIntent())
+				.setContentIntent(pIntentSettings)
+				.addAction(R.drawable.ic_settings, "Settings", pIntentSettings)
+				//.addAction(R.drawable.ic_pause, "Stop Notifications", stopNotifications())
+				
 				.setLargeIcon(
 						(((BitmapDrawable) context.getResources().getDrawable(
 								R.drawable.ic_launcher)).getBitmap()));
@@ -88,7 +110,22 @@ public class Notifications {
 			n.setVibrate(vibrate);
 		}
 
-		mNotificationManager.notify(0, n.build());
+		mNotificationManager.notify(id, n.build());
+	}
+
+	/*private PendingIntent stopNotifications() {
+		edit = prefs.edit();
+		edit.putBoolean(Values.getActiveNotif(), false);
+		edit.commit();
+		mNotificationManager.cancel(id);
+		return null;
+	}*/
+
+	private PendingIntent getRefreshIntent() {
+		Intent intentUpdate = new Intent(context, UpdateWeather.class);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, intentUpdate, PendingIntent.FLAG_UPDATE_CURRENT);
+		mNotificationManager.cancel(id);
+		return pendingIntent;
 	}
 
 	private void getValuesNotification(Weather weather) {
